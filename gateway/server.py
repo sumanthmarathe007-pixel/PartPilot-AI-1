@@ -5,7 +5,7 @@ The hosting platform should terminate public HTTPS and forward to PORT.
 No third-party Python packages are required by this gateway.
 """
 from __future__ import annotations
-
+from urllib.parse import urlsplit
 import hmac
 import json
 import logging
@@ -94,13 +94,13 @@ class Handler(BaseHTTPRequestHandler):
         LOG.info("%s - %s", self.address_string(), fmt % args)
 
     def do_GET(self) -> None:  # noqa: N802
-        if self.path.rstrip("/") == "/health":
+        if urlsplit(self.path).path.rstrip("/") == "/health":
             _json_response(self, 200, {"status": "ok", "service": "partpilot-gateway"})
         else:
             _json_response(self, 404, {"error": "not_found"})
 
     def do_POST(self) -> None:  # noqa: N802
-        if self.path.rstrip("/") != "/v1/plan":
+        if urlsplit(self.path).path.rstrip("/") == "/v1/plan":
             _json_response(self, 404, {"error": "not_found"})
             return
 
