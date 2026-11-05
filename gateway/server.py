@@ -100,7 +100,7 @@ class Handler(BaseHTTPRequestHandler):
             _json_response(self, 404, {"error": "not_found"})
 
     def do_POST(self) -> None:  # noqa: N802
-        if urlsplit(self.path).path.rstrip("/") == "/v1/plan":
+        if urlsplit(self.path).path.rstrip("/") != "/v1/plan":
             _json_response(self, 404, {"error": "not_found"})
             return
 
