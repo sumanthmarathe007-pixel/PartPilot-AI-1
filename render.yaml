@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: partpilot-llm-gateway
+    runtime: python
+    buildCommand: python --version
+    startCommand: python gateway/server.py
+    healthCheckPath: /health
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GATEWAY_TOKEN
+        sync: false
+      - key: GEMINI_MODEL
+        sync: false
+      - key: GEMINI_API_VERSION
+        value: v1beta

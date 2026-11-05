@@ -1,0 +1,2 @@
+# No third-party requirements for the controller or standard-library gateway.
+# The organizer supplies the approved package set in its Python 3.12.14 runtime.

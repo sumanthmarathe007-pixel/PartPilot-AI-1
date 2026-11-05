@@ -1,0 +1,1 @@
+"""PartPilot AI core package."""
